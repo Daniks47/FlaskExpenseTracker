@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Add Expense</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}   <!-- CSRF protection, don't skip this -->
+
+        <div>
+            {{ form.amount.label }}
+            {{ form.amount() }}
+            {% for error in form.amount.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.category.label }}
+            {{ form.category() }}
+        </div>
+
+        <div>
+            {{ form.description.label }}
+            {{ form.description() }}
+        </div>
+
+        {{ form.submit() }}
+    </form>
+
+    <a href="{{ url_for('expenses') }}">Cancel</a>
+{% endblock %}

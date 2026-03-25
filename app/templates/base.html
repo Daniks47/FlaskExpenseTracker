@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {%if title%}
+        <title>{{title}} - WebDev</title>
+        {%else%}
+        <title>Welcome to our page!</title>
+        {%endif%}
+    </head>
+    <body>
+        <div>
+            Expense Tracker:
+            <a href="{{ url_for('index') }}">Home</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('expenses') }}">Expenses</a>
+            {% endif %}
+        <!--it's a better practice to use url_for() and not direct links-->
+        
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {%block content%} {%endblock%}
+    </body>
+</html>
