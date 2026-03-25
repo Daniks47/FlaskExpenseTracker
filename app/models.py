@@ -17,7 +17,6 @@ class User(UserMixin, db.Model):
 
     password_hash: so.Mapped[str] = so.mapped_column(sa.String(256))
     #must be optional[str] but it keeps getting me an error
-    posts: so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -37,21 +36,6 @@ class User(UserMixin, db.Model):
 
 
 
-class Post(db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key= True)
-
-    body: so.Mapped[str] = so.mapped_column(sa.String(140))
-
-    timestamp: so.Mapped[datetime] = so.mapped_column(
-        index= True, default=lambda: datetime.now(timezone.utc))
-
-    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index= True)
-
-    author: so.Mapped[User] = so.relationship(back_populates='posts')
-
-    def __repr__(self):
-        return '<User {}>'.format(self.body)
-    
 
 
 @login.user_loader
