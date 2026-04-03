@@ -1,32 +1,51 @@
 {% extends "base.html" %}
-    {%block content%}
-    <h1>Sign In</h1>
-    
-    <form action=""method="post" novalidate>
-    <!--novalidate makes server to validate the form -->
-    <!--Using "POST" instead of "GET" is considered as good ux practice-->
-        {{ form.hidden_tag() }}
-    <!--hidden tag with secret token is needed for against CSFR attacks-->
-        <p>
-            {{form.username.label}}<br>
-            {{form.username(size = 32)}}
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{error}}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{form.password.label}}<br>
-            {{form.password(size = 32)}}
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{error}}]</span>
-            {% endfor %}
-            <!-- now we have for loop that continiosly checks both 
-            login and password and if it's empty - error is displayed
-            it ends with a endfor(loop)-->
-        </p>
-        <p>{{form.remember_me()}} {{form.remember_me.label}}</p>
-        <p>{{form.submit()}}</p>
-        
-    </form>
-    <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
-    {%endblock%}
+
+{% block content %}
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+            <div class="card shadow-sm p-4">
+
+                <h1 class="mb-4">Sign In</h1>
+
+                <form action="" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <!-- USERNAME -->
+                    <div class="mb-3">
+                        {{ form.username.label(class="form-label") }}
+                        {{ form.username(class="form-control") }}
+                        {% for error in form.username.errors %}
+                        <div class="text-danger small mt-1">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="mb-3">
+                        {{ form.password.label(class="form-label") }}
+                        {{ form.password(class="form-control") }}
+                        {% for error in form.password.errors %}
+                        <div class="text-danger small mt-1">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- REMEMBER ME -->
+                    <div class="mb-3 form-check">
+                        {{ form.remember_me(class="form-check-input") }}
+                        {{ form.remember_me.label(class="form-check-label") }}
+                    </div>
+
+                    <!-- SUBMIT -->
+                    {{ form.submit(class="btn btn-primary w-100") }}
+
+                </form>
+
+                <p class="text-center mt-3 mb-0">
+                    New user? <a href="{{ url_for('register') }}">Register here</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

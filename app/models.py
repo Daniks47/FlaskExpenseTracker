@@ -16,7 +16,6 @@ class User(UserMixin, db.Model):
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index = True, unique = True)
 
     password_hash: so.Mapped[str] = so.mapped_column(sa.String(256))
-    #must be optional[str] but it keeps getting me an error
 
     def __repr__(self):
         return '<User {}>'.format(self.username)

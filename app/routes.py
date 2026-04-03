@@ -94,3 +94,23 @@ def delete_expense(id):
     db.session.commit()
     flash('Expense deleted','info')
     return redirect(url_for('expenses'))
+
+
+@app.route('/expenses/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_expense(id):
+    expense = Expense.query.get_or_404(id)
+    if expense.user_id != current_user.id:
+        abort(403)
+
+    form = ExpenseForm(obj=expense)
+    if form.validate_on_submit():
+        expense.amount = form.amount.data
+        expense.category = form.category.data
+        expense.description = form.description.data
+        db.session.commit()
+        flash('Expense updated!', 'success')
+        return redirect(url_for('expenses'))
+
+    form.submit.label.text = 'Update Expense'
+    return render_template('add_expense.html', form=form, edit=True)
