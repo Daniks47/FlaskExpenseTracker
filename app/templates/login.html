@@ -11,7 +11,7 @@
                 <form action="" method="post" novalidate>
                     {{ form.hidden_tag() }}
 
-                    <!-- USERNAME -->
+                    <!-- Username -->
                     <div class="mb-3">
                         {{ form.username.label(class="form-label") }}
                         {{ form.username(class="form-control") }}
@@ -20,7 +20,7 @@
                         {% endfor %}
                     </div>
 
-                    <!-- PASSWORD -->
+                    <!-- password -->
                     <div class="mb-3">
                         {{ form.password.label(class="form-label") }}
                         {{ form.password(class="form-control") }}
@@ -29,13 +29,13 @@
                         {% endfor %}
                     </div>
 
-                    <!-- REMEMBER ME -->
+                    <!-- remember me? -->
                     <div class="mb-3 form-check">
                         {{ form.remember_me(class="form-check-input") }}
                         {{ form.remember_me.label(class="form-check-label") }}
                     </div>
 
-                    <!-- SUBMIT -->
+                    <!-- submit btn -->
                     {{ form.submit(class="btn btn-primary w-100") }}
 
                 </form>

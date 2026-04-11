@@ -4,7 +4,7 @@
     <h1>{{ 'Edit Expense' if edit else 'Add Expense' }}</h1>
 
     <form method="POST">
-        {{ form.hidden_tag() }}   <!-- CSRF protection, don't skip this -->
+        {{ form.hidden_tag() }}   <!-- csrf protection -->
 
         <div>
             {{ form.amount.label }}
